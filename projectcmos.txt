@@ -1,0 +1,42 @@
+
+.subckt inverter 1 2 3
+M1  3 1 0 0 nmod w=100u l=10u
+M2  3 1 2 2 pmod w=100u l=10u
+.model nmod nmos level=54 version=4.7
+.model pmod pmos level=54 version=4.7
+.ends
+vdd 2 0 dc 5
+vj 35 0 pulse(0 5 0 0 0 10m 20m)
+vk 44 0 pulse(0 5 0 0 0 20m 40m)
+vclk 37 2 pulse(0 5 0 0 0 10m 20m)
+xj 35 2 31 inverter
+xk 44 2 24 inverter
+xclk 37 2 30 30 inverter
+xq 29 2 27 inverter
+xq1 39 2 40 inverter
+x1 33 2 23 inverter
+x2 23 2 33 inverter
+.model nmod nmos level=54 version=4.7
+.model pmod pmos level=54 version=4.7
+M5 25 24 23 23 nmod w=100u l=10u
+M6 25 26 23 23 nmod w=100u l=10u
+M7 25 27 23 23 nmod w=100u l=10u
+M8 32 29 25 25 nmod w=100u l=10u
+M9 28 29 23 23 nmod w=100u l=10u
+M10 28 30 23 23 nmod w=100u l=10u
+M11 28 31 23 23 nmod w=100u l=10u
+M12 32 27 28 28 nmod w=100u l=10u
+M13 36 35 33 33 nmod w=100u l=10u
+M14 38 37 36 36 nmod w=100u l=10u
+M15 32 39 38 38 nmod w=100u l=10u
+M16 32 40 33 33 nmod w=100u l=10u
+M17 32 39 33 33 nmod w=100u l=10u
+M18 32 40 41 41 nmod w=100u l=10u
+M19 41 42 43 43 nmod w=100u l=10u
+M20 43 44 33 33 nmod w=100u l=10u
+.tran 0.1m 60m
+.control
+run
+plot v(35) v(44) v(42) v(39) v(40)
+.endc
+.end
